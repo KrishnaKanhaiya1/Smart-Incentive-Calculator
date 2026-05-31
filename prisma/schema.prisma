@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  password      String
+  role          Role      @default(SALES_OFFICER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([role])
+}
+
+model CarModel {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  baseSuffix String
+  variant   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sales SalesEntry[]
+}
+
+model IncentiveSlab {
+  id           String   @id @default(cuid())
+  minRange     Int
+  maxRange     Int?
+  incentiveAmount Float
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([minRange, maxRange])
+  @@index([minRange])
+}
+
+model SalesEntry {
+  id        String   @id @default(cuid())
+  month     Int
+  year      Int
+  carModelId String
+  carModel  CarModel @relation(fields: [carModelId], references: [id], onDelete: Cascade)
+  quantity  Int
+  calculatedIncentive Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([month, year, carModelId])
+  @@index([month, year])
+}
+
+enum Role {
+  ADMIN
+  SALES_OFFICER
+}
