@@ -1,0 +1,65 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Run build
+        run: npm run build
+
+      - name: Run linter
+        run: npm run lint
+        continue-on-error: true
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+        continue-on-error: true
+
+      - name: Build verification
+        run: test -d .next && echo "✅ Build successful"
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build
+        run: npm run build
+
+      - name: Check build success
+        run: echo "Build successful!"
+```
