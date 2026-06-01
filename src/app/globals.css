@@ -1,26 +1,252 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&f[]=cabinet-grotesk@800,900&display=swap');
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-background: var(--bg);
+  --color-foreground: var(--text-primary);
+  --font-sans: 'Satoshi', var(--font-sans);
   --font-mono: var(--font-geist-mono);
+  --font-heading: 'Cabinet Grotesk', var(--font-sans);
+  
+  --color-primary: var(--red);
+  --color-primary-foreground: var(--text-primary);
+  
+  --color-secondary: var(--surface-2);
+  --color-secondary-foreground: var(--red);
+  
+  --color-muted: var(--surface-3);
+  --color-muted-foreground: var(--text-muted);
+  
+  --color-accent: var(--red);
+  --color-accent-foreground: var(--text-primary);
+  
+  --color-destructive: var(--red);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--red);
+  
+  --color-card: var(--surface-1);
+  --color-card-foreground: var(--text-primary);
+  
+  --color-popover: var(--surface-1);
+  --color-popover-foreground: var(--text-primary);
+  
+  --color-surface-hover: var(--surface-hover);
+  --color-brand-red: var(--red);
+  --color-brand-red-glow: var(--red-glow);
+  
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --bg: #f4f5f8;
+  --surface-1: #ffffff;
+  --surface-2: #f9fafb;
+  --surface-3: #f3f4f6;
+  --surface-hover: #f1f5f9;
+
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+
+  --text-primary: #10111a;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
+
+  --red: #c8102e;
+  --red-bright: #e8192c;
+  --red-glow: rgba(200,16,46,0.08);
+  --green: #10b981;
+  --green-soft: rgba(16,185,129,0.08);
+  --amber: #f59e0b;
+
+  --bronze: #cd7f32;
+  --silver: #a8b8c8;
+  --gold: #d4a017;
+  --platinum: #7dd8e6;
+  --diamond: #8b5cf6;
+  
+  --radius: 12px;
 }
 
+.dark {
+  --bg: #080810;
+  --surface-1: #10101a;
+  --surface-2: #161624;
+  --surface-3: #1d1d2c;
+  --surface-hover: #24243a;
+
+  --border: rgba(255,255,255,0.07);
+  --border-strong: rgba(255,255,255,0.13);
+
+  --text-primary: #eeeff7;
+  --text-muted: #85879b;
+  --text-faint: #53566b;
+
+  --red: #c8102e;
+  --red-bright: #e8192c;
+  --red-glow: rgba(200,16,46,0.24);
+  --green: #22c55e;
+  --green-soft: rgba(34,197,94,0.12);
+  --amber: #f59e0b;
+
+  --bronze: #cd7f32;
+  --silver: #a8b8c8;
+  --gold: #d4a017;
+  --platinum: #7dd8e6;
+  --diamond: #b388ff;
+}
+
+/* Force theme style-sheet overrides globally */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Satoshi', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════ */
+/* PREMIUM AUTOMOTIVE POLISH                      */
+/* ═══════════════════════════════════════════════ */
+
+/* Global Noise texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.02;
+  z-index: 9998;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Signature Red Accent Bar */
+.top-accent-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 9999;
+  background: linear-gradient(90deg, transparent, var(--red) 30%, var(--red) 70%, transparent);
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--red);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--red-bright);
+}
+
+/* Tabular numerals utility */
+.tabular-nums {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Interactive Card Elevate */
+.data-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.data-card:hover {
+  border-color: rgba(200, 16, 46, 0.26) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 24px rgba(200, 16, 46, 0.08) !important;
+  transform: translateY(-2px);
+}
+
+/* Glassmorphism styling */
+.glass {
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  background: rgba(16, 16, 26, 0.65);
+  border: 1px solid var(--border);
+}
+
+.glass-premium {
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  background: rgba(8, 8, 16, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Input elements: focus and outline overlays */
+input:focus, select:focus, textarea:focus {
+  outline: none !important;
+  border-color: var(--red) !important;
+  box-shadow: 0 0 0 1px var(--red-glow) !important;
+}
+
+/* Shimmer sweeps */
+.shimmer-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; h-full: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  transition: all 0.6s ease;
+}
+
+.shimmer-sweep:hover::after {
+  left: 200%;
+}
+
+/* Keyframes animations */
+@keyframes breathe {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.08); }
+}
+
+.animate-breathe {
+  animation: breathe 5s ease-in-out infinite;
+}
+
+@keyframes draw-underline {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.draw-underline {
+  position: relative;
+}
+
+.draw-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 3px;
+  background-color: var(--red);
+  animation: draw-underline 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Spring scale indicators */
+.btn-press:active {
+  transform: scale(0.96);
+  transition: transform 0.1s ease;
 }
