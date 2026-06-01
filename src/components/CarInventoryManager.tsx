@@ -330,9 +330,9 @@ export default function CarInventoryManager() {
       </AnimatePresence>
       {/* Grid */}
       {filteredCars.length === 0 ? (
-        <div className="p-8 text-center border border-dashed border-white/[0.06] bg-[#0b0c14]/40 rounded-2xl">
-          <AlertCircle className="h-7 w-7 text-slate-550 mx-auto mb-2" />
-          <p className="text-xs text-slate-400 font-semibold">
+        <div className="p-8 text-center border border-dashed border-slate-200 dark:border-white/[0.06] bg-slate-50/40 dark:bg-[#0b0c14]/40 rounded-2xl">
+          <AlertCircle className="h-7 w-7 text-slate-450 dark:text-slate-550 mx-auto mb-2" />
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
             {searchQuery
               ? "No vehicle registry logs match your query."
               : "No vehicles in inventory. Add a vehicle model above to get started."}
@@ -351,8 +351,8 @@ export default function CarInventoryManager() {
                 transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
                 className={`flex flex-col justify-between p-0 rounded-3xl border transition-all duration-500 relative group overflow-hidden ${
                   car.isActive
-                    ? "bg-[#0b0c14] border-white/[0.04] shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] hover:-translate-y-1 hover:border-primary/20"
-                    : "bg-[#08080c]/60 border-white/[0.02] opacity-65 hover:opacity-85 shadow-none"
+                    ? "bg-white dark:bg-[#0b0c14] border-slate-200 dark:border-white/[0.04] shadow-[0_10px_30px_rgba(0,0,0,0.04)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] hover:-translate-y-1 hover:border-primary/20"
+                    : "bg-slate-50/60 dark:bg-[#08080c]/60 border-slate-200/50 dark:border-white/[0.02] opacity-65 hover:opacity-85 shadow-none"
                 }`}
               >
                 {editingId === car.id ? (
@@ -368,7 +368,7 @@ export default function CarInventoryManager() {
                           }))
                         }
                         autoFocus
-                        className="h-9 text-xs bg-slate-950 border-white/[0.08] focus-visible:ring-primary/30"
+                        className="h-9 text-xs bg-white dark:bg-slate-950 border-slate-200 dark:border-white/[0.08] text-slate-800 dark:text-slate-200 focus-visible:ring-primary/30"
                       />
                       <Input
                         type="text"
@@ -382,7 +382,7 @@ export default function CarInventoryManager() {
                         onKeyDown={(e) => {
                           if (e.key === "Enter") handleUpdate(car);
                         }}
-                        className="h-9 text-xs bg-slate-950 border-white/[0.08] focus-visible:ring-primary/30"
+                        className="h-9 text-xs bg-white dark:bg-slate-950 border-slate-200 dark:border-white/[0.08] text-slate-800 dark:text-slate-200 focus-visible:ring-primary/30"
                       />
                     </div>
                     <div className="flex justify-end gap-1.5 pt-1">
@@ -408,8 +408,8 @@ export default function CarInventoryManager() {
                 ) : (
                   <>
                     {/* Visual Render Header Section */}
-                    <div className="relative aspect-[1.8/1] w-full overflow-hidden bg-black/40 border-b border-white/[0.03] flex items-center justify-center p-1">
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0b0c14] to-transparent opacity-80 z-10 pointer-events-none" />
+                    <div className="relative aspect-[1.8/1] w-full overflow-hidden bg-slate-100/50 dark:bg-black/40 border-b border-slate-100 dark:border-white/[0.03] flex items-center justify-center p-1">
+                      <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#0b0c14] to-transparent opacity-80 z-10 pointer-events-none" />
                       
                       <img
                         src={getCarImage(car.modelName)}
@@ -446,7 +446,7 @@ export default function CarInventoryManager() {
                     {/* Card Content & Action Bar */}
                     <div className="p-5 flex-1 flex flex-col justify-between">
                       <div className="space-y-2">
-                        <h4 className="font-extrabold text-base text-slate-100 group-hover:text-primary transition-colors leading-tight">
+                        <h4 className="font-extrabold text-base text-slate-800 dark:text-slate-100 group-hover:text-primary transition-colors leading-tight">
                           {car.modelName}
                         </h4>
                         <span className="inline-block text-[9px] font-extrabold uppercase tracking-wider text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded-md">
@@ -454,8 +454,8 @@ export default function CarInventoryManager() {
                         </span>
                       </div>
 
-                      <div className="flex items-center justify-between mt-6 pt-3 border-t border-white/[0.04] opacity-80 group-hover:opacity-100 transition-opacity">
-                        <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                      <div className="flex items-center justify-between mt-6 pt-3 border-t border-slate-200/60 dark:border-white/[0.04] opacity-80 group-hover:opacity-100 transition-opacity">
+                        <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">
                           {car.isActive ? "Visible in Portal" : "Registry Locked"}
                         </span>
                         

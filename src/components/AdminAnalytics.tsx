@@ -145,7 +145,7 @@ export default function AdminAnalytics() {
       variants={containerVariants}
       initial="hidden"
       animate="show"
-      className="space-y-6 text-[#eeeff7]"
+      className="space-y-6 text-foreground"
     >
       {/* KPI Stats Grid - includes contextual delta indicators */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -196,14 +196,14 @@ export default function AdminAnalytics() {
           },
         ].map((kpi, idx) => (
           <motion.div key={idx} variants={itemVariants}>
-            <Card className="bg-[#10101a] border-white/[0.06] shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden hover:border-red-500/25 group">
+            <Card className="bg-card border-border shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden hover:border-red-500/25 group">
               <CardContent className="p-5 flex flex-col justify-between min-h-[135px]">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
                     <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest block leading-none mb-2">
                       {kpi.label}
                     </span>
-                    <span className="text-base font-black text-white font-mono truncate block leading-none mb-1.5 tabular-nums">
+                    <span className="text-base font-black text-slate-850 dark:text-white font-mono truncate block leading-none mb-1.5 tabular-nums">
                       {kpi.value}
                     </span>
                     
@@ -250,15 +250,15 @@ export default function AdminAnalytics() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Leaderboard Section - Rank metrics & expandable drawers */}
         <motion.div variants={itemVariants} className="lg:col-span-2">
-          <Card className="bg-[#10101a] border-white/[0.06] shadow-xl">
+          <Card className="bg-card border-border shadow-xl">
             <CardHeader className="pb-4">
               <div className="flex items-center gap-2">
                 <Award className="h-4.5 w-4.5 text-red-500" />
-                <CardTitle className="text-xs font-black tracking-widest text-white uppercase font-heading">
+                <CardTitle className="text-xs font-black tracking-widest text-slate-900 dark:text-white uppercase font-heading">
                   Sales Officer Leaderboard
                 </CardTitle>
               </div>
-              <CardDescription className="text-xs text-slate-400">
+              <CardDescription className="text-xs text-slate-500 dark:text-slate-400">
                 Live performance standing ranked by aggregate dynamic incentives. Click row for performance ledger logs.
               </CardDescription>
             </CardHeader>
@@ -282,12 +282,12 @@ export default function AdminAnalytics() {
                     const isSelected = selectedOfficer?.id === officer.id;
 
                     return (
-                      <div key={officer.id} className="border border-white/[0.04] rounded-2xl overflow-hidden bg-slate-950/20">
+                      <div key={officer.id} className="border border-slate-200 dark:border-white/[0.04] rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-950/20">
                         <motion.div
                           onClick={() => setSelectedOfficer(isSelected ? null : officer)}
-                          whileHover={{ x: 4, backgroundColor: "rgba(255, 255, 255, 0.02)" }}
+                          whileHover={{ x: 4, backgroundColor: "rgba(128, 128, 128, 0.05)" }}
                           className={`flex items-center justify-between p-3.5 cursor-pointer transition-all duration-300 ${
-                            isSelected ? "bg-white/[0.03] border-l-2 border-red-500" : ""
+                            isSelected ? "bg-slate-100/50 dark:bg-white/[0.03] border-l-2 border-red-500" : ""
                           }`}
                         >
                           <div className="flex items-center gap-3.5 min-w-0">
@@ -307,7 +307,7 @@ export default function AdminAnalytics() {
                             </motion.div>
                             
                             <div className="min-w-0">
-                              <h4 className="font-black text-xs text-slate-200 hover:text-white uppercase tracking-wider truncate font-heading">
+                              <h4 className="font-black text-xs text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white uppercase tracking-wider truncate font-heading">
                                 {officer.name}
                               </h4>
                               <span className="text-[10px] text-slate-500 block truncate font-medium font-mono mt-0.5">
@@ -319,11 +319,11 @@ export default function AdminAnalytics() {
                           <div className="flex items-center gap-6 shrink-0">
                             <div className="text-center font-mono">
                               <span className="text-[8px] font-extrabold text-slate-500 uppercase tracking-widest block leading-none">Units</span>
-                              <span className="text-xs font-black text-slate-205 block mt-1 tabular-nums">{officer.units}</span>
+                              <span className="text-xs font-black text-slate-800 dark:text-slate-205 block mt-1 tabular-nums">{officer.units}</span>
                             </div>
                             <div className="text-right font-mono min-w-[95px]">
                               <span className="text-[8px] font-extrabold text-slate-500 uppercase tracking-widest block leading-none">Payout</span>
-                              <span className="text-xs font-black text-emerald-400 block mt-1 tabular-nums">₹{officer.payout.toLocaleString("en-IN")}</span>
+                              <span className="text-xs font-black text-emerald-600 dark:text-emerald-400 block mt-1 tabular-nums">₹{officer.payout.toLocaleString("en-IN")}</span>
                             </div>
                           </div>
                         </motion.div>
@@ -336,28 +336,28 @@ export default function AdminAnalytics() {
                               animate={{ height: "auto", opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
                               transition={{ duration: 0.3, ease: "easeInOut" }}
-                              className="overflow-hidden bg-[#0c0c14]/80 border-t border-white/[0.04]"
+                              className="overflow-hidden bg-slate-50/80 dark:bg-[#0c0c14]/80 border-t border-slate-200 dark:border-white/[0.04]"
                             >
                               <div className="p-4.5 space-y-4 px-6 py-4">
-                                <div className="flex justify-between items-center pb-2 border-b border-white/[0.04]">
-                                  <h5 className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                <div className="flex justify-between items-center pb-2 border-b border-slate-200 dark:border-white/[0.04]">
+                                  <h5 className="text-[9px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">
                                     Performance analytics breakdown
                                   </h5>
-                                  <span className="text-[9px] font-black uppercase text-red-400 tracking-widest font-mono">
+                                  <span className="text-[9px] font-black uppercase text-red-500 dark:text-red-400 tracking-widest font-mono">
                                     OFFICER ID: {officer.id.slice(0, 8)}
                                   </span>
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-4">
-                                  <div className="p-3 bg-white/[0.01] rounded-xl border border-white/[0.04] space-y-1">
+                                  <div className="p-3 bg-white dark:bg-white/[0.01] rounded-xl border border-slate-200 dark:border-white/[0.04] space-y-1">
                                     <span className="text-[9px] font-bold text-slate-500 uppercase block">Average Yield per Car</span>
-                                    <span className="text-xs font-black text-[#eeeff7] font-mono tabular-nums">
+                                    <span className="text-xs font-black text-slate-800 dark:text-[#eeeff7] font-mono tabular-nums">
                                       ₹{officer.units > 0 ? Math.round(officer.payout / officer.units).toLocaleString("en-IN") : 0}
                                     </span>
                                   </div>
-                                  <div className="p-3 bg-white/[0.01] rounded-xl border border-white/[0.04] space-y-1">
+                                  <div className="p-3 bg-white dark:bg-white/[0.01] rounded-xl border border-slate-200 dark:border-white/[0.04] space-y-1">
                                     <span className="text-[9px] font-bold text-slate-500 uppercase block">Milestone Progress</span>
-                                    <span className="text-xs font-black text-emerald-450 font-mono tabular-nums">
+                                    <span className="text-xs font-black text-emerald-600 dark:text-emerald-450 font-mono tabular-nums">
                                       {Math.round((officer.units / 20) * 100)}% ({officer.units}/20 units)
                                     </span>
                                   </div>
@@ -365,7 +365,7 @@ export default function AdminAnalytics() {
 
                                 <div className="space-y-2">
                                   <span className="text-[9px] font-bold text-slate-500 uppercase block">Product Volume Contribution</span>
-                                  <div className="flex h-3 rounded-full bg-slate-900 overflow-hidden border border-white/[0.03]">
+                                  <div className="flex h-3 rounded-full bg-slate-100 dark:bg-slate-900 overflow-hidden border border-slate-200 dark:border-white/[0.03]">
                                     <div className="h-full bg-red-650" style={{ width: "45%" }} title="Glanza (45%)" />
                                     <div className="h-full bg-blue-500" style={{ width: "35%" }} title="Hyryder (35%)" />
                                     <div className="h-full bg-emerald-500" style={{ width: "20%" }} title="Other (20%)" />
@@ -391,15 +391,15 @@ export default function AdminAnalytics() {
 
         {/* Model breakdown Section - interactive hover state */}
         <motion.div variants={itemVariants}>
-          <Card className="bg-[#10101a] border-white/[0.06] shadow-xl h-full">
+          <Card className="bg-card border-border shadow-xl h-full">
             <CardHeader className="pb-4">
               <div className="flex items-center gap-2">
                 <Car className="h-4.5 w-4.5 text-red-500" />
-                <CardTitle className="text-xs font-black tracking-widest text-white uppercase font-heading">
+                <CardTitle className="text-xs font-black tracking-widest text-slate-900 dark:text-white uppercase font-heading">
                   Model Breakdown
                 </CardTitle>
               </div>
-              <CardDescription className="text-xs text-slate-400">
+              <CardDescription className="text-xs text-slate-500 dark:text-slate-400">
                 Sales distribution metrics grouped by Toyota vehicle models.
               </CardDescription>
             </CardHeader>
@@ -421,16 +421,16 @@ export default function AdminAnalytics() {
                         onMouseLeave={() => setHoveredModelIndex(null)}
                       >
                         <div className="flex justify-between text-xs font-semibold gap-2 transition-all">
-                          <span className={`truncate uppercase tracking-wider text-[10px] transition-colors ${isHovered ? "text-white font-black" : "text-slate-350"}`}>
+                          <span className={`truncate uppercase tracking-wider text-[10px] transition-colors ${isHovered ? "text-slate-900 dark:text-white font-black" : "text-slate-600 dark:text-slate-350"}`}>
                             {stat.name} <span className="text-[9px] text-slate-500 font-normal">({stat.variant})</span>
                           </span>
-                          <span className={`font-mono font-black tabular-nums transition-colors ${isHovered ? "text-red-400" : "text-white"}`}>
+                          <span className={`font-mono font-black tabular-nums transition-colors ${isHovered ? "text-red-500" : "text-slate-800 dark:text-white"}`}>
                             {stat.units} units
                           </span>
                         </div>
                         
                         <div className="flex items-center gap-2.5">
-                          <div className={`flex-1 h-2.5 rounded-full bg-slate-900 overflow-hidden border border-white/[0.03] transition-all duration-300 ${isHovered ? "scale-y-110 shadow-[0_0_10px_rgba(200,16,46,0.15)]" : ""}`}>
+                          <div className={`flex-1 h-2.5 rounded-full bg-slate-100 dark:bg-slate-900 overflow-hidden border border-slate-200 dark:border-white/[0.03] transition-all duration-300 ${isHovered ? "scale-y-110 shadow-[0_0_10px_rgba(200,16,46,0.15)]" : ""}`}>
                             <motion.div
                               className="h-full rounded-full"
                               initial={{ width: 0 }}
@@ -457,15 +457,15 @@ export default function AdminAnalytics() {
 
       {/* Month-over-Month Commission Outlay Trend (Area chart with custom gradient and crosshairs) */}
       <motion.div variants={itemVariants}>
-        <Card className="bg-[#10101a] border-white/[0.06] shadow-xl">
+        <Card className="bg-card border-border shadow-xl">
           <CardHeader className="pb-4">
             <div className="flex items-center gap-2">
               <TrendingUp className="h-4.5 w-4.5 text-red-500" />
-              <CardTitle className="text-xs font-black tracking-widest text-white uppercase font-heading">
+              <CardTitle className="text-xs font-black tracking-widest text-slate-900 dark:text-white uppercase font-heading">
                 Payout Trends (MoM Area)
               </CardTitle>
             </div>
-            <CardDescription className="text-xs text-slate-400">
+            <CardDescription className="text-xs text-slate-500 dark:text-slate-400">
               Chronological metrics charting dynamic commission disbursement curves. Hover for data details.
             </CardDescription>
           </CardHeader>
@@ -488,11 +488,11 @@ export default function AdminAnalytics() {
                         <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.0}/>
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.03)" vertical={false} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
                     <XAxis
                       dataKey="label"
                       tick={{ fontSize: 9, fill: "#85879b", fontWeight: 700, fontFamily: "Satoshi" }}
-                      axisLine={{ stroke: "rgba(255,255,255,0.06)" }}
+                      axisLine={{ stroke: "var(--border)" }}
                       tickLine={false}
                     />
                     <YAxis
@@ -509,17 +509,17 @@ export default function AdminAnalytics() {
                         if (!active || !payload?.length) return null;
                         const d = payload[0].payload as MonthlyTrend;
                         return (
-                          <div className="bg-[#10101a] border border-white/[0.08] rounded-xl shadow-2xl p-4 text-xs space-y-2 font-sans backdrop-blur-md">
-                            <p className="font-black text-white uppercase tracking-widest font-heading mb-1.5 flex items-center gap-1.5">
+                          <div className="bg-card border border-border rounded-xl shadow-2xl p-4 text-xs space-y-2 font-sans backdrop-blur-md">
+                            <p className="font-black text-slate-900 dark:text-white uppercase tracking-widest font-heading mb-1.5 flex items-center gap-1.5">
                               <Calendar className="h-3.5 w-3.5 text-red-500" />
                               {d.label} Performance
                             </p>
                             <div className="space-y-1">
-                              <p className="text-slate-400 flex justify-between gap-6">
-                                Volume Logged: <span className="font-bold text-white font-mono tabular-nums">{d.units} units</span>
+                              <p className="text-slate-500 dark:text-slate-400 flex justify-between gap-6">
+                                Volume Logged: <span className="font-bold text-slate-800 dark:text-white font-mono tabular-nums">{d.units} units</span>
                               </p>
-                              <p className="text-slate-400 flex justify-between gap-6">
-                                Incentive Outlay: <span className="font-black text-emerald-400 font-mono tabular-nums">₹{d.payout.toLocaleString("en-IN")}</span>
+                              <p className="text-slate-500 dark:text-slate-400 flex justify-between gap-6">
+                                Incentive Outlay: <span className="font-black text-emerald-600 dark:text-emerald-450 font-mono tabular-nums">₹{d.payout.toLocaleString("en-IN")}</span>
                               </p>
                             </div>
                           </div>

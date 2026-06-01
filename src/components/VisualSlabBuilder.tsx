@@ -43,9 +43,9 @@ interface TierTheme {
 const TIER_THEMES: TierTheme[] = [
   {
     label: "Bronze Tier",
-    bg: "bg-[#120d08] hover:bg-[#18110b]",
-    border: "border-[#cd7f32]/20 hover:border-[#cd7f32]/40",
-    glow: "shadow-[0_0_20px_rgba(205,127,50,0.05)]",
+    bg: "bg-[#fdfbf7] dark:bg-[#120d08] hover:bg-[#faf4ec] dark:hover:bg-[#18110b]",
+    border: "border-[#cd7f32]/30 dark:border-[#cd7f32]/20 hover:border-[#cd7f32]/50 dark:hover:border-[#cd7f32]/40",
+    glow: "shadow-[0_0_20px_rgba(205,127,50,0.03)] dark:shadow-[0_0_20px_rgba(205,127,50,0.05)]",
     accent: "bg-[#cd7f32]",
     iconBg: "bg-[#cd7f32]/10 border-[#cd7f32]/30",
     icon: "🥉",
@@ -53,9 +53,9 @@ const TIER_THEMES: TierTheme[] = [
   },
   {
     label: "Silver Tier",
-    bg: "bg-[#0c1015] hover:bg-[#11171f]",
-    border: "border-[#a8b8c8]/20 hover:border-[#a8b8c8]/40",
-    glow: "shadow-[0_0_20px_rgba(168,184,200,0.05)]",
+    bg: "bg-[#f7f9fb] dark:bg-[#0c1015] hover:bg-[#eef2f6] dark:hover:bg-[#11171f]",
+    border: "border-[#a8b8c8]/30 dark:border-[#a8b8c8]/20 hover:border-[#a8b8c8]/50 dark:hover:border-[#a8b8c8]/40",
+    glow: "shadow-[0_0_20px_rgba(168,184,200,0.03)] dark:shadow-[0_0_20px_rgba(168,184,200,0.05)]",
     accent: "bg-[#a8b8c8]",
     iconBg: "bg-[#a8b8c8]/10 border-[#a8b8c8]/30",
     icon: "🥈",
@@ -63,9 +63,9 @@ const TIER_THEMES: TierTheme[] = [
   },
   {
     label: "Gold Tier",
-    bg: "bg-[#141208] hover:bg-[#1a170b]",
-    border: "border-[#d4a017]/20 hover:border-[#d4a017]/40",
-    glow: "shadow-[0_0_20px_rgba(212,160,23,0.05)]",
+    bg: "bg-[#fdfdf7] dark:bg-[#141208] hover:bg-[#fafae9] dark:hover:bg-[#1a170b]",
+    border: "border-[#d4a017]/30 dark:border-[#d4a017]/20 hover:border-[#d4a017]/50 dark:hover:border-[#d4a017]/40",
+    glow: "shadow-[0_0_20px_rgba(212,160,23,0.03)] dark:shadow-[0_0_20px_rgba(212,160,23,0.05)]",
     accent: "bg-[#d4a017]",
     iconBg: "bg-[#d4a017]/10 border-[#d4a017]/30",
     icon: "🥇",
@@ -73,9 +73,9 @@ const TIER_THEMES: TierTheme[] = [
   },
   {
     label: "Platinum Tier",
-    bg: "bg-[#081315] hover:bg-[#0b1b1e]",
-    border: "border-[#7dd8e6]/20 hover:border-[#7dd8e6]/40",
-    glow: "shadow-[0_0_20px_rgba(125,216,230,0.05)]",
+    bg: "bg-[#f7fcfd] dark:bg-[#081315] hover:bg-[#edf9fa] dark:hover:bg-[#0b1b1e]",
+    border: "border-[#7dd8e6]/30 dark:border-[#7dd8e6]/20 hover:border-[#7dd8e6]/50 dark:hover:border-[#7dd8e6]/40",
+    glow: "shadow-[0_0_20px_rgba(125,216,230,0.03)] dark:shadow-[0_0_20px_rgba(125,216,230,0.05)]",
     accent: "bg-[#7dd8e6]",
     iconBg: "bg-[#7dd8e6]/10 border-[#7dd8e6]/30",
     icon: "💎",
@@ -83,9 +83,9 @@ const TIER_THEMES: TierTheme[] = [
   },
   {
     label: "Diamond Tier",
-    bg: "bg-[#110c18] hover:bg-[#181123]",
-    border: "border-[#b388ff]/20 hover:border-[#b388ff]/40",
-    glow: "shadow-[0_0_20px_rgba(179,136,255,0.05)]",
+    bg: "bg-[#faf7fd] dark:bg-[#110c18] hover:bg-[#f3edfa] dark:hover:bg-[#181123]",
+    border: "border-[#b388ff]/30 dark:border-[#b388ff]/20 hover:border-[#b388ff]/50 dark:hover:border-[#b388ff]/40",
+    glow: "shadow-[0_0_20px_rgba(179,136,255,0.03)] dark:shadow-[0_0_20px_rgba(179,136,255,0.05)]",
     accent: "bg-[#b388ff]",
     iconBg: "bg-[#b388ff]/10 border-[#b388ff]/30",
     icon: "👑",
@@ -349,18 +349,18 @@ export default function VisualSlabBuilder() {
 
   if (isLoading) {
     return (
-      <Card className="w-full max-w-3xl mx-auto border-white/5 bg-slate-950/40 backdrop-blur-md shadow-2xl">
+      <Card className="w-full max-w-3xl mx-auto border-border bg-card/40 backdrop-blur-md shadow-2xl">
         <CardHeader>
-          <CardTitle className="text-xl font-black tracking-tight text-white heading-font">
+          <CardTitle className="text-xl font-black tracking-tight text-slate-900 dark:text-white heading-font">
             DYNAMIC SLAB MATRIX CONFIGURATION
           </CardTitle>
-          <CardDescription className="text-slate-500">Retrieving active parameter configuration...</CardDescription>
+          <CardDescription className="text-slate-500 dark:text-slate-400">Retrieving active parameter configuration...</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-16 rounded-2xl bg-white/5 animate-pulse" />
+            <div key={i} className="h-16 rounded-2xl bg-slate-100 dark:bg-white/5 animate-pulse" />
           ))}
-          <div className="h-10 w-44 rounded-2xl bg-white/5 animate-pulse" />
+          <div className="h-10 w-44 rounded-2xl bg-slate-100 dark:bg-white/5 animate-pulse" />
         </CardContent>
       </Card>
     );
@@ -368,7 +368,7 @@ export default function VisualSlabBuilder() {
 
   return (
     <div className="space-y-6">
-      <Card className="w-full max-w-3xl mx-auto border-white/[0.06] shadow-2xl bg-slate-950/40 backdrop-blur-md overflow-hidden relative">
+      <Card className="w-full max-w-3xl mx-auto border-border shadow-2xl bg-card/40 backdrop-blur-md overflow-hidden relative">
         <div className="absolute top-0 right-0 w-48 h-48 bg-red-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-56 h-56 bg-indigo-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
@@ -380,10 +380,10 @@ export default function VisualSlabBuilder() {
               <TrendingUp className="h-5 w-5" />
             </div>
             <div>
-              <CardTitle className="text-sm font-black text-white tracking-widest uppercase font-heading">
+              <CardTitle className="text-sm font-black text-slate-900 dark:text-white tracking-widest uppercase font-heading">
                 Dynamic Tier Configuration Engine
               </CardTitle>
-              <CardDescription className="text-xs text-slate-400 mt-0.5">
+              <CardDescription className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Configure incentive slabs for your dealership force. Connect rates sequentially. Overlaps are forbidden.
               </CardDescription>
             </div>
@@ -435,7 +435,7 @@ export default function VisualSlabBuilder() {
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: idx * 0.05 }}
-                    className={`relative flex flex-col sm:flex-row items-stretch sm:items-center gap-4 bg-[#10101a] p-4 rounded-xl border transition-all duration-300 shadow-lg ${theme.bg} ${theme.border} ${theme.glow} ${
+                    className={`relative flex flex-col sm:flex-row items-stretch sm:items-center gap-4 p-4 rounded-xl border transition-all duration-300 shadow-lg ${theme.bg} ${theme.border} ${theme.glow} ${
                       isInvalid ? "border-red-500/60 shadow-[0_0_20px_rgba(239,68,68,0.25)] bg-red-950/10" : ""
                     }`}
                   >
@@ -446,7 +446,7 @@ export default function VisualSlabBuilder() {
 
                     <div className="grid grid-cols-3 gap-3 flex-1">
                       <div className="flex flex-col gap-1.5">
-                        <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none">Min Units</label>
+                        <label className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest leading-none">Min Units</label>
                         <div className="relative">
                           <Input
                             type="text"
@@ -458,13 +458,13 @@ export default function VisualSlabBuilder() {
                               const val = text === "" ? 0 : parseInt(text, 10);
                               updateSlab(idx, "minUnits", val);
                             }}
-                            className="bg-[#080810]/60 border-white/[0.08] focus:border-red-500 h-9 px-2 text-xs font-mono font-bold text-[#eeeff7] tabular-nums"
+                            className="bg-white dark:bg-[#080810]/60 border-slate-200 dark:border-white/[0.08] focus:border-red-500 h-9 px-2 text-xs font-mono font-bold text-slate-800 dark:text-[#eeeff7] tabular-nums"
                           />
                         </div>
                       </div>
                       
                       <div className="flex flex-col gap-1.5">
-                        <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none">Max Units</label>
+                        <label className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest leading-none">Max Units</label>
                         <div className="relative">
                           <Input
                             type="text"
@@ -474,15 +474,15 @@ export default function VisualSlabBuilder() {
                               const text = e.target.value.trim().replace(/[^0-9]/g, "");
                               updateSlab(idx, "maxUnits", text === "" ? null : parseInt(text, 10));
                             }}
-                            className="bg-[#080810]/60 border-white/[0.08] focus:border-red-500 h-9 px-2 text-xs font-mono font-bold text-[#eeeff7] tabular-nums"
+                            className="bg-white dark:bg-[#080810]/60 border-slate-200 dark:border-white/[0.08] focus:border-red-500 h-9 px-2 text-xs font-mono font-bold text-slate-800 dark:text-[#eeeff7] tabular-nums"
                           />
                         </div>
                       </div>
 
                       <div className="flex flex-col gap-1.5">
-                        <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none">₹ / Car Rate</label>
+                        <label className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest leading-none">₹ / Car Rate</label>
                         <div className="relative flex items-center">
-                          <span className="absolute left-2.5 text-emerald-450 font-bold text-xs">₹</span>
+                          <span className="absolute left-2.5 text-emerald-600 dark:text-emerald-450 font-bold text-xs">₹</span>
                           <Input
                             type="text"
                             inputMode="numeric"
@@ -494,7 +494,7 @@ export default function VisualSlabBuilder() {
                               const val = text === "" ? 0 : parseInt(text, 10);
                               updateSlab(idx, "incentivePerCar", val);
                             }}
-                            className="bg-[#080810]/80 border-white/[0.08] focus:border-red-500 h-9 pl-5 pr-2 text-xs font-mono font-black text-emerald-400 tabular-nums shadow-[0_0_10px_rgba(16,185,129,0.02)]"
+                            className="bg-white dark:bg-[#080810]/80 border-slate-200 dark:border-white/[0.08] focus:border-red-500 h-9 pl-5 pr-2 text-xs font-mono font-black text-emerald-600 dark:text-emerald-450 tabular-nums shadow-[0_0_10px_rgba(16,185,129,0.02)]"
                           />
                         </div>
                       </div>
