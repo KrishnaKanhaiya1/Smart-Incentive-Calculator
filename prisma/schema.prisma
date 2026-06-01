@@ -1,0 +1,65 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  SALES
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  name         String
+  passwordHash String   @default("")
+  role         Role     @default(SALES)
+  salesLogs    SalesLog[]
+  createdAt    DateTime @default(now())
+}
+
+model CarModel {
+  id        String   @id @default(uuid())
+  modelName String
+  variant   String
+  isActive  Boolean  @default(true)
+  salesLogs SalesLog[]
+
+  @@unique([modelName, variant])
+}
+
+model IncentiveSlab {
+  id              String   @id @default(uuid())
+  minUnits        Int
+  maxUnits        Int?
+  incentivePerCar Float
+  createdAt       DateTime @default(now())
+}
+
+model SalesLog {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  carModelId String
+  carModel   CarModel @relation(fields: [carModelId], references: [id], onDelete: Cascade)
+
+  quantity   Int
+  month      Int
+  year       Int
+  status     String   @default("PENDING")
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, carModelId, month, year])
+}
+
+model SlabHistoryLog {
+  id        String   @id @default(uuid())
+  snapshot  Json
+  changedBy String
+  createdAt DateTime @default(now())
+}
