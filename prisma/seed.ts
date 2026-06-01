@@ -33,7 +33,7 @@ async function main() {
   });
 
   // Create car models
-  const cars = await prisma.carModel.createMany({
+  await prisma.carModel.createMany({
     data: [
       {
         name: "Honda City",
