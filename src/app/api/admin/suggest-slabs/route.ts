@@ -1,11 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 
-/**
- * AI-Powered Slab Configuration Suggestions
- * Uses Google Gemini API to suggest optimal incentive slab configurations
- * based on current sales data and pricing models
- */
+// Dynamic slab suggestions endpoint using Gemini
 
 export async function POST(request: NextRequest) {
   try {
@@ -21,7 +17,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { currentCars, currentSlabs, salesVolume, targetPayout } = body;
 
-    // Build prompt for Gemini
+    // Build query
     const prompt = `You are a sales incentive consultant for Nippon Toyota. Based on the following data, suggest 5 optimal slab configurations:
 
 Current Car Models: ${currentCars && currentCars.length > 0 ? currentCars.map((c: any) => c.modelName).join(", ") : "Multiple models"}
@@ -36,20 +32,16 @@ For each suggestion:
 
 Format the response as JSON with array of suggestions. Keep it professional and concise.`;
 
-    // Initialize Gemini with API key
     const genAI = new GoogleGenerativeAI(apiKey);
-    
-    // Use gemini-2.5-flash for superior performance
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     const result = await model.generateContent(prompt);
     const responseText = result.response.text();
 
-    // Try to parse as JSON, fallback to text response
     let suggestions;
     try {
       suggestions = JSON.parse(responseText);
     } catch {
-      suggestions = { text: responseText, raw: responseText };
+      suggestions = responseText;
     }
 
     return NextResponse.json({
