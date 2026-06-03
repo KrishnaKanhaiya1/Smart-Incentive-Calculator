@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
@@ -49,7 +49,6 @@
     "eslint-config-next": "16.2.6",
     "jsdom": "^23.2.0",
     "prisma": "^6.19.3",
-    "puppeteer-core": "^25.1.0",
     "tailwindcss": "^4",
     "tsx": "^4.22.3",
     "typescript": "^5",

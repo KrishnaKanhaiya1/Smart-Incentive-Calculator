@@ -85,21 +85,14 @@ export default function DashboardPage() {
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="mb-8"
         >
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200/50 dark:border-emerald-800/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 shadow-sm shadow-emerald-500/5">
-              <BarChart3 className="h-5 w-5" />
-            </div>
-            <div>
-              <span className="text-[9px] font-extrabold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest block mb-0.5 leading-none">
-                Sales Officer Engine
-              </span>
-              <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight leading-none">
-                Welcome back, {session.name}!
-              </h1>
-            </div>
+          <div className="flex items-center gap-2 mb-1.5">
+            <BarChart3 className="h-5 w-5 text-emerald-500" />
+            <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Performance Dashboard
+            </h1>
           </div>
-          <p className="text-sm text-slate-500 dark:text-slate-400 pl-13 font-medium leading-relaxed">
-            Let's crush your targets and maximize your tiered slabs dynamic commission incentives for this period.
+          <p className="text-sm text-slate-500 dark:text-slate-400 pl-7">
+            Log monthly vehicle sales and track real-time incentive earnings across all tiers.
           </p>
         </motion.div>
 
