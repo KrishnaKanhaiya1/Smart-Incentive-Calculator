@@ -30,6 +30,17 @@ interface EditState {
   variant: string;
 }
 
+const getCarImage = (modelName: string) => {
+  const name = modelName.toLowerCase();
+  if (name.includes("fortuner")) return "/fortuner.png";
+  if (name.includes("innova")) return "/innova.png";
+  if (name.includes("hyryder")) return "/hyryder.png";
+  if (name.includes("vellfire")) return "/vellfire.png";
+  if (name.includes("glanza")) return "/glanza.png";
+  if (name.includes("camry")) return "/camry.png";
+  return "/camry.png"; // Fallback to Camry
+};
+
 export default function CarInventoryManager() {
   const [cars, setCars] = useState<CarModel[]>([]);
   const [loading, setLoading] = useState(true);
@@ -317,146 +328,163 @@ export default function CarInventoryManager() {
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Grid */}
       {filteredCars.length === 0 ? (
-        <div className="p-8 text-center border border-dashed border-slate-200 dark:border-slate-700 bg-slate-50/30 dark:bg-slate-800/30 rounded-2xl">
-          <AlertCircle className="h-7 w-7 text-slate-300 dark:text-slate-600 mx-auto mb-2" />
-          <p className="text-xs text-slate-500 font-semibold">
+        <div className="p-8 text-center border border-dashed border-slate-200 dark:border-white/[0.06] bg-slate-50/40 dark:bg-[#0b0c14]/40 rounded-2xl">
+          <AlertCircle className="h-7 w-7 text-slate-450 dark:text-slate-550 mx-auto mb-2" />
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
             {searchQuery
               ? "No vehicle registry logs match your query."
               : "No vehicles in inventory. Add a vehicle model above to get started."}
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-          {filteredCars.map((car, index) => (
-            <motion.div
-              key={car.id}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.02, duration: 0.25 }}
-              className={`flex flex-col justify-between p-4 rounded-2xl border transition-all duration-300 relative group overflow-hidden ${
-                car.isActive
-                  ? "bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 shadow-sm hover:shadow-md"
-                  : "bg-slate-50/50 dark:bg-slate-800/50 border-slate-100 dark:border-slate-800 opacity-60 hover:opacity-85"
-              }`}
-            >
-              {editingId === car.id ? (
-                <div className="space-y-3">
-                  <div className="flex flex-col gap-2">
-                    <Input
-                      type="text"
-                      value={editState.modelName}
-                      onChange={(e) =>
-                        setEditState((prev) => ({
-                          ...prev,
-                          modelName: e.target.value,
-                        }))
-                      }
-                      autoFocus
-                      className="h-8 text-xs bg-white dark:bg-slate-800 border-indigo-200 dark:border-indigo-800 focus-visible:ring-indigo-500/25"
-                    />
-                    <Input
-                      type="text"
-                      value={editState.variant}
-                      onChange={(e) =>
-                        setEditState((prev) => ({
-                          ...prev,
-                          variant: e.target.value,
-                        }))
-                      }
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") handleUpdate(car);
-                      }}
-                      className="h-8 text-xs bg-white dark:bg-slate-800 border-indigo-200 dark:border-indigo-800 focus-visible:ring-indigo-500/25"
-                    />
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <AnimatePresence mode="popLayout">
+            {filteredCars.map((car, index) => (
+              <motion.div
+                key={car.id}
+                layout
+                initial={{ opacity: 0, y: 12, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
+                className={`flex flex-col justify-between p-0 rounded-3xl border transition-all duration-500 relative group overflow-hidden ${
+                  car.isActive
+                    ? "bg-white dark:bg-[#0b0c14] border-slate-200 dark:border-white/[0.04] shadow-[0_10px_30px_rgba(0,0,0,0.04)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] hover:-translate-y-1 hover:border-primary/20"
+                    : "bg-slate-50/60 dark:bg-[#08080c]/60 border-slate-200/50 dark:border-white/[0.02] opacity-65 hover:opacity-85 shadow-none"
+                }`}
+              >
+                {editingId === car.id ? (
+                  <div className="p-5 space-y-3.5">
+                    <div className="flex flex-col gap-2">
+                      <Input
+                        type="text"
+                        value={editState.modelName}
+                        onChange={(e) =>
+                          setEditState((prev) => ({
+                            ...prev,
+                            modelName: e.target.value,
+                          }))
+                        }
+                        autoFocus
+                        className="h-9 text-xs bg-white dark:bg-slate-950 border-slate-200 dark:border-white/[0.08] text-slate-800 dark:text-slate-200 focus-visible:ring-primary/30"
+                      />
+                      <Input
+                        type="text"
+                        value={editState.variant}
+                        onChange={(e) =>
+                          setEditState((prev) => ({
+                            ...prev,
+                            variant: e.target.value,
+                          }))
+                        }
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") handleUpdate(car);
+                        }}
+                        className="h-9 text-xs bg-white dark:bg-slate-950 border-slate-200 dark:border-white/[0.08] text-slate-800 dark:text-slate-200 focus-visible:ring-primary/30"
+                      />
+                    </div>
+                    <div className="flex justify-end gap-1.5 pt-1">
+                      <button
+                        onClick={() => handleUpdate(car)}
+                        disabled={savingId === car.id}
+                        className="p-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 rounded-xl transition-all disabled:opacity-50"
+                      >
+                        {savingId === car.id ? (
+                          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                        ) : (
+                          <Check className="h-3.5 w-3.5" />
+                        )}
+                      </button>
+                      <button
+                        onClick={() => setEditingId(null)}
+                        className="p-2 text-slate-400 hover:bg-white/[0.05] rounded-xl transition-all"
+                      >
+                        <X className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex justify-end gap-1.5 pt-1">
-                    <button
-                      onClick={() => handleUpdate(car)}
-                      disabled={savingId === car.id}
-                      className="p-1.5 bg-emerald-50 dark:bg-emerald-950/30 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-lg transition-all disabled:opacity-50 shadow-inner"
-                    >
-                      {savingId === car.id ? (
-                        <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                      ) : (
-                        <Check className="h-3.5 w-3.5" />
-                      )}
-                    </button>
-                    <button
-                      onClick={() => setEditingId(null)}
-                      className="p-1.5 text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-all"
-                    >
-                      <X className="h-3.5 w-3.5" />
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <>
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex gap-2.5 min-w-0">
-                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center border shrink-0 transition-transform group-hover:rotate-6 duration-300 ${
-                        car.isActive
-                          ? "bg-indigo-50 dark:bg-indigo-950/30 border-indigo-100 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400"
-                          : "bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-400"
-                      }`}>
-                        <Car className="h-4 w-4" />
-                      </div>
+                ) : (
+                  <>
+                    {/* Visual Render Header Section */}
+                    <div className="relative aspect-[1.8/1] w-full overflow-hidden bg-slate-100/50 dark:bg-black/40 border-b border-slate-100 dark:border-white/[0.03] flex items-center justify-center p-1">
+                      <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#0b0c14] to-transparent opacity-80 z-10 pointer-events-none" />
                       
-                      <div className="min-w-0">
-                        <h4 className="font-extrabold text-sm text-slate-900 dark:text-white truncate leading-snug">
+                      <img
+                        src={getCarImage(car.modelName)}
+                        alt={car.modelName}
+                        className="w-full h-full object-contain group-hover:scale-108 transition-transform duration-[8000ms] ease-out z-0 drop-shadow-[0_12px_24px_rgba(0,0,0,0.85)] select-none pointer-events-none"
+                      />
+                      
+                      {/* Interactive Status Indicator - subtle pulsing gradient badge */}
+                      <button
+                        onClick={() => handleToggleActive(car)}
+                        disabled={savingId === car.id}
+                        className={`absolute top-4 right-4 z-20 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-extrabold uppercase border tracking-widest transition-all duration-300 disabled:opacity-50 ${
+                          car.isActive
+                            ? "bg-emerald-950/70 text-emerald-400 border-emerald-500/30 hover:border-emerald-500/50 shadow-[0_0_12px_rgba(16,185,129,0.15)] hover:shadow-[0_0_18px_rgba(16,185,129,0.35)]"
+                            : "bg-slate-900/80 text-slate-400 border-slate-750 hover:bg-slate-800"
+                        }`}
+                      >
+                        <span className={`w-1.5 h-1.5 rounded-full ${
+                          car.isActive 
+                            ? "bg-gradient-to-r from-emerald-400 to-teal-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.9)]" 
+                            : "bg-slate-500"
+                        }`} />
+                        {car.isActive ? "Live" : "Draft"}
+                      </button>
+
+                      {/* Class Category Badge */}
+                      <span className="absolute top-4 left-4 z-20 px-2.5 py-0.5 rounded-md bg-black/60 border border-white/10 text-[8px] font-extrabold text-slate-400 uppercase tracking-widest leading-none">
+                        {car.modelName.toLowerCase().includes("fortuner") || car.modelName.toLowerCase().includes("hyryder") ? "SUV" : 
+                         car.modelName.toLowerCase().includes("vellfire") ? "Luxury MUV" : 
+                         car.modelName.toLowerCase().includes("camry") ? "Premium Sedan" : "Hatchback"}
+                      </span>
+                    </div>
+
+                    {/* Card Content & Action Bar */}
+                    <div className="p-5 flex-1 flex flex-col justify-between">
+                      <div className="space-y-2">
+                        <h4 className="font-extrabold text-base text-slate-800 dark:text-slate-100 group-hover:text-primary transition-colors leading-tight">
                           {car.modelName}
                         </h4>
-                        <span className="text-[9px] font-black uppercase tracking-wider text-slate-400">
+                        <span className="inline-block text-[9px] font-extrabold uppercase tracking-wider text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded-md">
                           {car.variant}
                         </span>
                       </div>
-                    </div>
 
-                    <button
-                      onClick={() => handleToggleActive(car)}
-                      disabled={savingId === car.id}
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[9px] font-black uppercase border tracking-wider transition-all disabled:opacity-50 ${
-                        car.isActive
-                          ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 border-emerald-200/60 dark:border-emerald-800/40 hover:bg-emerald-100/50"
-                          : "bg-slate-50 dark:bg-slate-800 text-slate-400 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700"
-                      }`}
-                    >
-                      <span className={`w-1 h-1 rounded-full ${car.isActive ? "bg-emerald-500 animate-pulse" : "bg-slate-400"}`} />
-                      {car.isActive ? "Live" : "Inactive"}
-                    </button>
-                  </div>
-
-                  <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-100/60 dark:border-slate-800/60 opacity-80 group-hover:opacity-100 transition-opacity">
-                    <span className="text-[10px] text-slate-400 font-semibold">
-                      {car.isActive ? "Visible to Officers" : "Hidden from Officers"}
-                    </span>
-                    
-                    <div className="flex items-center gap-1.5 shrink-0">
-                      <button
-                        onClick={() => startEdit(car)}
-                        disabled={savingId === car.id}
-                        className="p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 rounded-lg transition-all disabled:opacity-50"
-                        title="Edit Model Details"
-                      >
-                        <Pencil className="h-3.5 w-3.5" />
-                      </button>
-                      <button
-                        onClick={() => setDeleteTarget(car)}
-                        disabled={savingId === car.id}
-                        className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 rounded-lg transition-all disabled:opacity-50"
-                        title="Permanently Delete Model"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" />
-                      </button>
+                      <div className="flex items-center justify-between mt-6 pt-3 border-t border-slate-200/60 dark:border-white/[0.04] opacity-80 group-hover:opacity-100 transition-opacity">
+                        <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">
+                          {car.isActive ? "Visible in Portal" : "Registry Locked"}
+                        </span>
+                        
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <button
+                            onClick={() => startEdit(car)}
+                            disabled={savingId === car.id}
+                            className="p-2 text-slate-450 hover:text-white hover:bg-white/[0.04] rounded-xl transition-all disabled:opacity-50"
+                            title="Edit Model Details"
+                          >
+                            <Pencil className="h-3.5 w-3.5" />
+                          </button>
+                          <button
+                            onClick={() => setDeleteTarget(car)}
+                            disabled={savingId === car.id}
+                            className="p-2 text-slate-450 hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-all disabled:opacity-50"
+                            title="Permanently Delete Model"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </>
-              )}
-            </motion.div>
-          ))}
-        </div>
+                  </>
+                )}
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       )}
     </div>
   );
