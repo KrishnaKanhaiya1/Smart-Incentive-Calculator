@@ -1,41 +1,33 @@
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Dependency directories
+node_modules/
+venv/
+.venv/
+__pycache__/
+*.pyc
 
-# testing
-/coverage
+# Build outputs
+dist/
+build/
+.next/
+out/
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
+# Environment files & secrets
+.env
+.env.local
+.env.production
+.env.staging
+.env.pulled
 *.pem
+*.key
 
-# debug
+# Logs & temp files
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# local env files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# IDE
-.vscode
-.idea
-*.swp
-*.swo
-
-# OS
+debug.log
+error.log
+combined.log
 .DS_Store
 Thumbs.db
 .vercel
