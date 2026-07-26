@@ -8,7 +8,6 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState<"ADMIN" | "SALES_OFFICER">("SALES_OFFICER");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -22,7 +21,7 @@ export default function RegisterPage() {
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password, role }),
+        body: JSON.stringify({ name, email, password }),
       });
 
       const data = await res.json();
@@ -88,18 +87,6 @@ export default function RegisterPage() {
               required
               className="input"
             />
-          </div>
-
-          <div>
-            <label className="label">Role</label>
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value as "ADMIN" | "SALES_OFFICER")}
-              className="input"
-            >
-              <option value="SALES_OFFICER">Sales Officer</option>
-              <option value="ADMIN">Admin</option>
-            </select>
           </div>
 
           <button

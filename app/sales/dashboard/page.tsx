@@ -212,7 +212,7 @@ export default function SalesDashboard() {
                 onChange={(e) => setYear(parseInt(e.target.value))}
                 className="input"
               >
-                {[2024, 2025, 2026, 2027].map((y) => (
+                {Array.from({ length: (new Date().getFullYear() + 2) - 2024 + 1 }, (_, i) => 2024 + i).map((y) => (
                   <option key={y} value={y}>
                     {y}
                   </option>
