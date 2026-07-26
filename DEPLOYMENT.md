@@ -17,7 +17,7 @@ Before deploying, ensure you have:
 1. **GitHub Account**: https://github.com/anantkumarntpc-afk/sic
 2. **Vercel Account**: https://vercel.com (connected to GitHub)
 3. **PostgreSQL Database**: 
-   - Local: `postgresql://user:password@localhost:5432/database_name`
+   - Local: `postgresql://user:password@localhost:5432/sic`
    - Cloud: Vercel Postgres, Supabase, or Railway
 
 ## Quick Deployment (3 Steps)
@@ -47,7 +47,7 @@ gh repo create anantkumarntpc-afk/sic --source=. --push
 3. Select `anantkumarntpc-afk/sic` repository
 4. Add environment variables:
    ```
-   DATABASE_URL = postgresql://user:password@localhost:5432/database_name
+   DATABASE_URL = postgresql://...
    NEXTAUTH_SECRET = (generate: openssl rand -hex 32)
    NEXTAUTH_URL = https://[your-vercel-url].vercel.app
    ```
@@ -77,7 +77,7 @@ Create `.env.local` (or set in Vercel dashboard):
 
 ```env
 # Database
-DATABASE_URL="postgresql://user:password@localhost:5432/database_name"
+DATABASE_URL="postgresql://user:password@host:5432/sic"
 
 # NextAuth
 NEXTAUTH_SECRET="generate-with: openssl rand -hex 32"

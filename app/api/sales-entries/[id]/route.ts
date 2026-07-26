@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { prisma } from "@/lib/prisma";
+import { PrismaClient } from "@prisma/client";
 import { authOptions } from "../../../../lib/auth";
+
+const prisma = new PrismaClient();
 
 export async function PUT(
   request: NextRequest,
@@ -33,16 +35,6 @@ export async function PUT(
       return NextResponse.json(
         { error: "Sales entry not found" },
         { status: 404 }
-      );
-    }
-
-    const userId = (session.user as any).id;
-    const role = (session.user as any).role;
-
-    if (role !== "ADMIN" && entry.userId !== userId) {
-      return NextResponse.json(
-        { error: "Unauthorized to update this entry" },
-        { status: 403 }
       );
     }
 
@@ -97,27 +89,6 @@ export async function DELETE(
   }
 
   try {
-    const entry = await prisma.salesEntry.findUnique({
-      where: { id: params.id },
-    });
-
-    if (!entry) {
-      return NextResponse.json(
-        { error: "Sales entry not found" },
-        { status: 404 }
-      );
-    }
-
-    const userId = (session.user as any).id;
-    const role = (session.user as any).role;
-
-    if (role !== "ADMIN" && entry.userId !== userId) {
-      return NextResponse.json(
-        { error: "Unauthorized to delete this entry" },
-        { status: 403 }
-      );
-    }
-
     await prisma.salesEntry.delete({
       where: { id: params.id },
     });

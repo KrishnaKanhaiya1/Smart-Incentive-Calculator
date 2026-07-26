@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { prisma } from "@/lib/prisma";
+import { PrismaClient } from "@prisma/client";
 import { authOptions } from "../../../../lib/auth";
+
+const prisma = new PrismaClient();
 
 async function checkAdminAccess() {
   const session = await getServerSession(authOptions);

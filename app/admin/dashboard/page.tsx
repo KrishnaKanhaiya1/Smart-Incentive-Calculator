@@ -20,9 +20,9 @@ export default function AdminDashboard() {
         ]);
 
         setStats({
-          carModels: Array.isArray(carModels) ? carModels.length : 0,
-          incentiveSlabs: Array.isArray(slabs) ? slabs.length : 0,
-          salesEntries: Array.isArray(sales) ? sales.length : 0,
+          carModels: carModels.length,
+          incentiveSlabs: slabs.length,
+          salesEntries: sales.length,
         });
       } catch (error) {
         console.error("Error fetching stats:", error);
